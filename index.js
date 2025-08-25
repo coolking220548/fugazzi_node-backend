@@ -3,6 +3,7 @@ import axios from "axios";
 import cors from "cors";
 
 const app = express();
+const ML_API_URL = "https://fugazzi-flask-backend.onrender.com";
 const PORT = process.env.PORT || 5001;
 
 app.use(cors());
@@ -13,7 +14,7 @@ app.post("/api/analyze", async (req, res) => {
     const { text } = req.body;
 
     // Forward to FastAPI ML backend
-    const response = await axios.post("http://localhost:8001/detect", { text });
+    const response = await axios.post(ML_API_URL+"/detect", { text });
 
     res.json({
       original: text,
@@ -26,5 +27,5 @@ app.post("/api/analyze", async (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Node backend running at http://localhost:${PORT}`);
+  console.log(`Node backend running on port ${PORT}`);
 });
