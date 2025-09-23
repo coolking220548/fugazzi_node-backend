@@ -4,7 +4,9 @@ import cors from "cors";
 import multer from "multer";
 
 const app = express();
+// const PYTHON_API_URL = "http://localhost:8001/";
 const PYTHON_API_URL = "https://fugazzi-flask-backend.onrender.com/";
+
 const PORT = process.env.PORT || 5001;
 
 const upload = multer({ storage: multer.memoryStorage() });
@@ -72,7 +74,7 @@ app.post("/api/urlAnalyze", async (req, res) => {
 	try {
 		const {url} = req.body;
 
-		const response = await axios.post(`${PYTHON_API_URL}/url/predict`, {url});
+		const response = await axios.post(`${PYTHON_API_URL}url/predict`, {url});
 
 		res.json({
 			original: url,
