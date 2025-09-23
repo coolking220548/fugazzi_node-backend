@@ -60,6 +60,7 @@ app.post("/api/newsTextExtraction", upload.single("image"), async (req, res) => 
         const response = await axios.post(`${PYTHON_API_URL}news/textExtract`, {
             image: base64image,
         });
+        console.log("Python response:", response.data);
 
         res.json({
             original: req.file.originalname,
