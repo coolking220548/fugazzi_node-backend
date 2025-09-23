@@ -34,6 +34,7 @@ app.post("/api/newsAnalyze", async (req, res) => {
 app.post("/api/newsScrape", async (req, res) => {
 	try {
 		const {url} = req.body;
+        console.log(url)
 
 		// Forward to FastAPI scraping backend
 		const response = await axios.post(`${PYTHON_API_URL}news/scrape`, {url});
