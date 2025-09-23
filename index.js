@@ -124,6 +124,9 @@ app.post("/api/imageAnalyze", upload.single("image"), async (req, res) => {
     }
 });
 
+app.get("/", (req, res) => {
+  res.send("Node backend is running");
+});
 
 app.listen(PORT, () => {
   	console.log(`Node backend running on port ${PORT}`);
