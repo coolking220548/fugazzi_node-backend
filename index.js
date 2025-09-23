@@ -5,7 +5,7 @@ import multer from "multer";
 
 const app = express();
 // const PYTHON_API_URL = "http://localhost:8001/";
-const PYTHON_API_URL = "https://fugazzi-flask-backend.onrender.com/";
+const PYTHON_API_URL = "https://fugazziflask-backend-production.up.railway.app/";
 
 const PORT = process.env.PORT || 5001;
 
