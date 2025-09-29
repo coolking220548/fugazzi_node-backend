@@ -2,8 +2,10 @@ import express from "express";
 import axios from "axios";
 import cors from "cors";
 import multer from "multer";
+import { authMiddleware } from "./authMiddleware.js";
 
 const app = express();
+
 // const PYTHON_API_URL = "http://localhost:8001/";
 const PYTHON_API_URL = "https://fugazziflask-backend-production.up.railway.app/";
 
@@ -14,7 +16,7 @@ const upload = multer({ storage: multer.memoryStorage() });
 app.use(cors());
 app.use(express.json());
 
-app.post("/api/newsAnalyze", async (req, res) => {
+app.post("/api/newsAnalyze", authMiddleware, async (req, res) => {
 	try {
 		const { text } = req.body;
 
@@ -31,7 +33,7 @@ app.post("/api/newsAnalyze", async (req, res) => {
 	}
 });
 
-app.post("/api/newsScrape", async (req, res) => {
+app.post("/api/newsScrape", authMiddleware, async (req, res) => {
 	try {
 		const {url} = req.body;
         console.log(url)
@@ -49,7 +51,7 @@ app.post("/api/newsScrape", async (req, res) => {
 	}
 });
 
-app.post("/api/newsTextExtraction", upload.single("image"), async (req, res) => {
+app.post("/api/newsTextExtraction", authMiddleware, upload.single("image"), async (req, res) => {
     try {
         if (!req.file) {
             return res.status(400).json({error: "No image uploaded"})
@@ -72,7 +74,7 @@ app.post("/api/newsTextExtraction", upload.single("image"), async (req, res) => 
     }
 });
 
-app.post("/api/urlAnalyze", async (req, res) => {
+app.post("/api/urlAnalyze", authMiddleware, async (req, res) => {
 	try {
 		const {url} = req.body;
 
@@ -88,7 +90,7 @@ app.post("/api/urlAnalyze", async (req, res) => {
 	}
 });
 
-app.post("/api/fbAnalyze", async (req, res) => {
+app.post("/api/fbAnalyze", authMiddleware, async (req, res) => {
 	try {
 		const {url} = req.body;
 
@@ -104,7 +106,7 @@ app.post("/api/fbAnalyze", async (req, res) => {
 	}
 });
 
-app.post("/api/imageAnalyze", upload.single("image"), async (req, res) => {
+app.post("/api/imageAnalyze", authMiddleware, upload.single("image"), async (req, res) => {
     try {
         if (!req.file) {
             return res.status(400).json({error: "No image uploaded"})
