@@ -6,8 +6,8 @@ import { authMiddleware } from "./authMiddleware.js";
 
 const app = express();
 
-// const PYTHON_API_URL = "http://localhost:8001/";
-const PYTHON_API_URL = "https://fugazziflask-backend-production.up.railway.app/";
+const PYTHON_API_URL = "http://localhost:8001/";
+// const PYTHON_API_URL = "https://fugazziflask-backend-production.up.railway.app/";
 
 const PORT = process.env.PORT || 5001;
 
@@ -19,6 +19,7 @@ app.use(express.json());
 app.post("/api/newsAnalyze", authMiddleware, async (req, res) => {
 	try {
 		const { text } = req.body;
+        console.log(text);
 
 		// Forward to FastAPI ML backend
 		const response = await axios.post(`${PYTHON_API_URL}news/predict`, { text });
