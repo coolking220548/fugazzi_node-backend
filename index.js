@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 5001;
 const upload = multer({ storage: multer.memoryStorage() });
 
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: 'https://coolking220548.github.io',
     credentials: true,
 }));
 app.use(express.json());
@@ -22,7 +22,6 @@ app.use(express.json());
 app.post("/api/newsAnalyze", authMiddleware, async (req, res) => {
 	try {
 		const { text } = req.body;
-        console.log(text);
 
 		// Forward to FastAPI ML backend
 		const response = await axios.post(`${PYTHON_API_URL}news/predict`, { text });
